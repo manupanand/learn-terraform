@@ -9,7 +9,9 @@ resource "aws_instance" frontend" {
 }
 
 resource "aws_route53_record" "frontend" {
-  zone_id = aws_route53_zone.primary.zone_id #hosted zone id
+  zone_id = aws_route53_zone.primary.zone_id
+  #data.aws_route53_zone.zone.zone_id
+   #hosted zone id
   name    = "frontend.dev.example.online"
   type    = "A"
   ttl     = 15
