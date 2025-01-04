@@ -9,3 +9,29 @@ variable "components" {
 resource "null_resource" "test2" {
   count = length(var.components)
 }
+variable "fruits" {
+  default = {
+    apple={
+        name="apple"
+        quantity=100
+    }
+    banana={
+        name="banana"
+        quantity=20
+    }
+  }
+}
+resource "null_resource" "fruits" {
+  for_each = var.fruits
+}
+
+variable "instances" {
+  default = {
+    frontend={}
+    catalogue={}
+    mongo={}
+  }
+}
+resource "null_resource" "instaces" {
+  for_each = var.instances
+}
