@@ -1,0 +1,31 @@
+name: Terraform and Ansible Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Save Terraform Output
+        run: terraform output -json > inventory.json
+
+      - name: Run Ansible Playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: playbook.yml
+          inventory: inventory.py
