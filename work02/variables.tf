@@ -4,7 +4,7 @@
 variable "domain_name" {
   default = "example.online"
 }
-variable "components" {
+variable "instance_components" {
   default = {
     frontend={
       instace_type="t3.micro"
