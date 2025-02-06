@@ -11,8 +11,8 @@ terraform {
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
-  subscription_id ="b14c026b-ae19-4ae1-b201-4c9c8bbe61ad"
-  tenant_id="56a8a143-d9fe-43da-a019-4bbc155c2a80"
+  subscription_id ="b"
+  tenant_id="0"
 }
 variable "prefix" {
   default = "devops"
@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "main" {
   os_profile {
     computer_name  = "devops"
     admin_username = "ubuntu"
-    admin_password = "Password1234!"
+    admin_password = "Pass!"
   }
   os_profile_linux_config {
     disable_password_authentication = false
