@@ -22,6 +22,6 @@ resource "google_compute_instance" "web_local" {
 }
 
 provider "google" {
-  project = "zeta-flare-449207-r0"
+  project = "zeta-"
   region  = "asia-south1"
 }
