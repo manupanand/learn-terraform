@@ -20,3 +20,8 @@ resource "google_compute_instance" "web_local" {
 
   tags = ["demo-terraform"]  # These tags can be used for firewall rules
 }
+
+provider "google" {
+  project = "zeta-flare-449207-r0"
+  region  = "asia-south1"
+}
