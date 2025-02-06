@@ -11,6 +11,7 @@ terraform {
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
+  subscription_id ="b14c026b-ae19-4ae1-b201-4c9c8bbe61ad"
 }
 variable "prefix" {
   default = "devops"
