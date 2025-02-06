@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "main" {
   os_profile {
     computer_name  = "devops"
     admin_username = "ubuntu"
-    admin_password = "Pass!"
+    admin_password = "Password1234!"
   }
   os_profile_linux_config {
     disable_password_authentication = false
