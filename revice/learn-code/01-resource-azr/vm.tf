@@ -21,6 +21,7 @@ variable "prefix" {
 resource "azurerm_resource_group" "devops-test" {
   name     = "${var.prefix}-resources"
   location = "Central India"
+#   force_destroy = true
 }
 
 resource "azurerm_virtual_network" "main" {
