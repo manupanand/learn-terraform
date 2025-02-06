@@ -12,6 +12,7 @@ terraform {
 provider "azurerm" {
   features {}
   subscription_id ="b14c026b-ae19-4ae1-b201-4c9c8bbe61ad"
+  tenant_id="56a8a143-d9fe-43da-a019-4bbc155c2a80"
 }
 variable "prefix" {
   default = "devops"
