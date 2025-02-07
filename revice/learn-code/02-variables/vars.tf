@@ -14,5 +14,5 @@ variable "list"{
     default=[10,20,"name",true]
 }
 output "list"{
-    value=list[2]
+    value=var.list[2]
 }
