@@ -16,3 +16,9 @@ variable "list"{
 output "list"{
     value=var.list[2]
 }
+variable "name"{
+    default = "manu"
+}
+output "echo"{
+    value=var.name
+}
