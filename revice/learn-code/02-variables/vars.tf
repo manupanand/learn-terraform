@@ -20,5 +20,5 @@ variable "name"{
     default = "manu"
 }
 output "echo"{
-    value=var.name
+    value="username : ${var.name}"
 }
