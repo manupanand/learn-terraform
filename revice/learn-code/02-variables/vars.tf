@@ -31,3 +31,9 @@ variable "map"{
 output "map-data"{
     value=" Course : ${var.map["course"]}, trainer is : ${var.map.trainer}"
 }
+variable "empty"{
+    
+}
+output "empty-variable"{
+    value=var.empty
+}
