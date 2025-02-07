@@ -22,3 +22,12 @@ variable "name"{
 output "echo"{
     value="username : ${var.name}"
 }
+variable "map"{
+    default = {
+        course="Devops",
+        trainer="manu"
+    }
+}
+output "map-data"{
+    value=" Course : ${var.map["course"]}, trainer is : ${var.map.trainer}"
+}
