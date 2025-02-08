@@ -5,6 +5,6 @@ variable "components" {
     default = ["frontend","datatbase","backend"]
 }
 resource "null_resource" "test1"{
-    count =lenght(var.components)
+    count =length(var.components)
 }
   
