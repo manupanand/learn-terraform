@@ -17,7 +17,7 @@ variable "fruits" {
 }
 
 resource "null_resource" "instance" {
-  
+  for_each =  var.instance
 }
 
 variable "instance" {
