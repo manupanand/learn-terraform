@@ -4,10 +4,6 @@ data "aws_ami" "ami-data"{
     owners = ["140264529686"]
 }
 
-output "ami"{
-    value=data.aws_ami.ami-data
-  }
-
 #security group VPC
 data "aws_security_groups" "security_group"{
     filter {
@@ -20,7 +16,4 @@ data "aws_security_groups" "security_group"{
 data "aws_route53_zone" "zone"{
     name= var.domain_name
     
-}
-variable "domain_name"{
-    default = "manupanand.online"
 }

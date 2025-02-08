@@ -1,14 +1,14 @@
 
 resource "aws_instance" "frontend"{
     instance_type = var.instance_type
-    ami = var.ami
-    vpc_security_group_ids = [ var.security_group_id]
+    ami = data.aws_ami.ami-data.image_id
+    vpc_security_group_ids = [ data.aws_security_groups.security_group.ids]
     tags={
         Name="frontend.dev"
     }
 }
 resource "aws_route53_record" "frontend" {
-  zone_id = var.zone_id
+  zone_id = data.aws_route53_zone.zone.zone_id
   name    = "frontend.dev.${var.domain_name}"
   type    = "A"
   ttl     = 25
