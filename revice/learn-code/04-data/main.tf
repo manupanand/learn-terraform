@@ -15,6 +15,9 @@ data "aws_security_groups" "security_group"{
       values=["ssh-ngrok"]
     }
 }
+output "sg_name" {
+  value= data.aws_security_groups.security_group
+}
 
 #route 53 zone id
 data "aws_route53_zone" "zone"{
@@ -23,4 +26,7 @@ data "aws_route53_zone" "zone"{
 }
 variable "domain_name"{
     default = "manupanand.online"
+}
+output "route_zone_id" {
+  value = data.aws_route53_zone.zone
 }
