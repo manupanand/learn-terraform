@@ -1,17 +1,18 @@
 
 resource "aws_instance" "instance"{
-    count=length(var.components)
-    instance_type = var.instance_type
+   for_each = var.components
+    instance_type = each.value[instance_type]
     ami = data.aws_ami.ami-data.image_id
     vpc_security_group_ids = [ data.aws_security_groups.security_group.ids]
     tags={
-        Name="${var.components[count.index]}.dev"
+        Name="${each.key}.dev"
     }
 }
 resource "aws_route53_record" "dns_record" {
+  for_each = var.components
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "${var.components[count.index]}.dev.${var.domain_name}"
+  name    = "${each.key}.dev.${var.domain_name}"
   type    = "A"
   ttl     = 25
-  records = [aws_instance.instance[count.index].private_ip]
+  records = [aws_instance.instance[each.key].private_ip]
 } 

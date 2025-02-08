@@ -3,9 +3,10 @@ variable "instance_type"{
 }
 
 
-variable "zone_id"{
-    default = ""
-}
+
 variable "domain_name"{
     default = "manupanand.online"
+}
+variable "components" {
+  default = ["frontend","catalogue","mongo"]
 }
