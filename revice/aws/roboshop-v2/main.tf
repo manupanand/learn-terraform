@@ -16,3 +16,7 @@ resource "aws_route53_record" "dns_record" {
   ttl     = 25
   records = [aws_instance.instance[each.key].private_ip]
 } 
+terraform {
+  backend "s3" {
+  }
+}
