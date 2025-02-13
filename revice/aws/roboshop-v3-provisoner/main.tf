@@ -36,3 +36,8 @@ resource "null_resource" "ansible" {
        ]
     }
 }
+
+terraform {
+  backend "s3" {
+  }
+}
