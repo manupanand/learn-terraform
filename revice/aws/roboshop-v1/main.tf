@@ -15,3 +15,8 @@ resource "aws_route53_record" "dns_record" {
   ttl     = 25
   records = [aws_instance.instance[count.index].private_ip]
 } 
+terraform {
+  backend "s3" {
+    # leave empty comes from each env state-files
+  }
+}
