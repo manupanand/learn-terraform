@@ -7,6 +7,3 @@ module "dns" {
   private_ip= module.ec2.private_ip
 }
 
-variable "zone_id" {
-  
-}
