@@ -3,7 +3,7 @@ resource "aws_instance" "instance"{
     count=length(var.components)
     instance_type = var.instance_type
     ami = data.aws_ami.ami-data.image_id
-    vpc_security_group_ids = [ data.aws_security_groups.security_group.ids]
+    vpc_security_group_ids =  data.aws_security_groups.security_group.ids
     tags={
         Name="${var.components[count.index]}.dev"
     }
