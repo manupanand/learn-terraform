@@ -1,3 +1,3 @@
-bucket="bucket-name"
-key="robo-tf-state/prod/terraform.tfstate"
-region="ap-south-2"
+bucket = "dev-ops-state-manupa"
+key    = "test/prod/terraform.tfstate"
+region = "ap-south-1"
