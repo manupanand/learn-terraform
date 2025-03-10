@@ -186,7 +186,8 @@ eks={
     add_ons={
         vpc-cni="v1.18.3-eksbuild.2"
         kube-proxy="v1.30.3-eksbuild.20"
-        coredns="v1.11.1-eksbuild.11"
+        coredns="v1.11.1-eksbuild.11" 
+        eks-pod-identity-agent = "v1.3.2-eksbuild.2"
         
     }
     eks-iam-access={

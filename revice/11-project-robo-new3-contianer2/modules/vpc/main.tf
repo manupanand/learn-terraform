@@ -3,6 +3,7 @@ resource "aws_vpc" "main" {
   cidr_block = var.cidr
   tags = {
     Name="${var.env}-vpc"
+    "kubernets.io/cluster/${var.env}-eks"="owned"
   }
 }
 
@@ -26,6 +27,8 @@ resource "aws_subnet" "public" {
   availability_zone = var.availability_zones[count.index]
   tags = {
     Name= "public-subnet-${split("-",var.availability_zones[count.index])[2]}"
+    "kubernets.io/cluster/${var.env}-eks"="owned"
+    "kubernets.io/role/elb"=1 # for public 1
   }
 }
 resource "aws_subnet" "web" {
@@ -35,6 +38,8 @@ resource "aws_subnet" "web" {
   availability_zone = var.availability_zones[count.index]
   tags = {
     Name= "web-subnet-${split("-",var.availability_zones[count.index])[2]}"
+    "kubernets.io/cluster/${var.env}-eks"="owned"
+     
   }
 }
 resource "aws_subnet" "app" {
@@ -44,6 +49,8 @@ resource "aws_subnet" "app" {
   availability_zone = var.availability_zones[count.index]
   tags = {
     Name= "app-subnet-${split("-",var.availability_zones[count.index])[2]}"
+    "kubernets.io/cluster/${var.env}-eks"="owned"
+     "kubernets.io/role/internal-elb"=1 # for private 1
   }
 }
 resource "aws_subnet" "db" {
@@ -53,6 +60,7 @@ resource "aws_subnet" "db" {
   availability_zone = var.availability_zones[count.index]
   tags = {
     Name= "db-subnet-${split("-",var.availability_zones[count.index])[2]}"
+    "kubernets.io/cluster/${var.env}-eks"="owned"
   }
 }
 # route tables

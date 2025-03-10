@@ -1,0 +1,7 @@
+controller:
+  service:
+    # targetPorts:
+    #   http: http 
+    #   https: http 
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-south-2:058264470882:certificate/4cd9df2c-4516-4d66-ad57-c84f1ba19b50 # arn certificate tls

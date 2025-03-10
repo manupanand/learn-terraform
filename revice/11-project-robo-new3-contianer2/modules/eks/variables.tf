@@ -17,3 +17,6 @@ variable "add_ons" {
 variable "eks-iam-access" {
   
 }
+variable "vpc_id" {
+  
+}

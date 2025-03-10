@@ -1,0 +1,35 @@
+# from  github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+#grafana: 
+ #ingress:
+  # enabled: false #change it to true
+
+grafana:
+#  service:
+#   type: NodePort
+ ingress: 
+   enabled: true 
+   ingressClassName: alb
+   annotations: 
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/group.name: roboshop
+      alb.ingress.kubernetes.io/healthcheck-path: /login
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-2:058264470882:certificate/4cd9df2c-4516-4d66-ad57-c84f1ba19b50
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+prometheus:
+#  service:
+#   type: NodePort
+ ingress: 
+   enabled: true 
+   paths: /*
+   ingressClassName: alb
+   annotations: 
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/group.name: roboshop
+      alb.ingress.kubernetes.io/healthcheck-path: /graph
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-2:058264470882:certificate/4cd9df2c-4516-4d66-ad57-c84f1ba19b50
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'

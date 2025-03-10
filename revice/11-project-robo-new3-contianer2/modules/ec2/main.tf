@@ -46,6 +46,7 @@ resource "aws_instance" "main" {
   }))
   tags = {
     Name= "${var.name}-${var.env}-db"
+    Monitor= "true"
   }
 }
 
