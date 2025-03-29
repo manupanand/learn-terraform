@@ -30,10 +30,28 @@ resource "aws_instance" "node_1" {
     }
  
 }
+output "node_1_ip" {
+    depends_on = [ aws_instance.node_1 ]
+  value =  aws_instance.node_1.public_ip
+}
+resource "null_resource" "wait" {
+    depends_on = [ aws_instance.node_1 ]
+  provisioner "local-exec" {
+
+    command = <<EOT
+        while[ -z "$(terraform output -raw node_1_ip)" ]; do
+          echo "waiting for node1 public ip"
+          sleep 10
+        done
+
+    EOT
+    
+  }
+}
 
 
 resource "aws_instance" "node_2" {
-  depends_on = [ aws_instance.node_1 ]
+  depends_on = [ null_resource.wait ]
     ami                         = var.aws_ami_id
      instance_type               = "t3.micro"
      vpc_security_group_ids      = [var.security_group_id]
