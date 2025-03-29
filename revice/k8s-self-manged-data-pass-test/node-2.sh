@@ -52,6 +52,6 @@ while ! sshpass -p "${AWS_PASSWORD}" ssh -o StrictHostKeyChecking=no "${AWS_USER
 done
 sshpass -p "${AWS_PASSWORD}" scp -o StrictHostKeyChecking=no "${AWS_USER}"@"${remote_ip}":/tmp/execute.sh /tmp/execute.sh &>>$LOG_FILE
 
-chmod +x /tmp/execute.sh  &>>$LOG_FILE
+sudo chmod +x /tmp/execute.sh  &>>$LOG_FILE
 
-/bin/bash /tmp/execute.sh  &>>$LOG_FILE
+sudo /bin/bash /tmp/execute.sh  &>>$LOG_FILE
