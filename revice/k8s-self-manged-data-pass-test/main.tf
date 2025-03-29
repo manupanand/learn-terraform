@@ -39,7 +39,7 @@ resource "null_resource" "wait" {
   provisioner "local-exec" {
 
     command = <<EOT
-        while[ -z "$(terraform output -raw node_1_ip)" ]; do
+        while [ -z "$(terraform output -raw node_1_ip)" ]; do
           echo "waiting for node1 public ip"
           sleep 10
         done
