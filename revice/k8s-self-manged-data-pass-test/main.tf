@@ -31,10 +31,7 @@ resource "aws_instance" "node_1" {
  
 }
 
-output "remote_ip" {
-    depends_on = [ aws_instance.node_1 ]
-  value = aws_instance.node_1.public_ip
-}
+
 resource "aws_instance" "node_2" {
   depends_on = [ aws_instance.node_1 ]
     ami                         = var.aws_ami_id
@@ -45,7 +42,7 @@ resource "aws_instance" "node_2" {
         AWS_USER     =var.aws_user
         AWS_PASSWORD =var.aws_password
         role_name    ="node-2"
-        remote_ip    = output.remote_ip
+        remote_ip    = aws_instance.node_1.public_ip
      }))
 }
 variable "aws_user" {
