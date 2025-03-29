@@ -34,8 +34,12 @@ output "node_1_ip" {
     depends_on = [ aws_instance.node_1 ]
   value =  aws_instance.node_1.public_ip
 }
+resource "time_sleep" "delay" {
+  depends_on = [ aws_instance.node_1 ]
+  create_duration = "180s"
+}
 resource "null_resource" "wait" {
-    depends_on = [ aws_instance.node_1 ]
+    depends_on = [ time_sleep.delay ]
   provisioner "local-exec" {
 
     command = <<EOT
@@ -47,6 +51,7 @@ resource "null_resource" "wait" {
     EOT
     
   }
+  
 }
 
 
