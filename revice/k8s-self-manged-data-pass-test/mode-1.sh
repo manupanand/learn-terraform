@@ -35,7 +35,7 @@ sudo systemctl restart sshd
 
 # Set the password for "ec2-user" (USE WITH CAUTION)
 echo "${AWS_USER}:${AWS_PASSWORD}" | sudo chpasswd  &>>$LOG_FILE
-sleep 120
+sleep 60
 
 # install ansible 
 sudo dnf install -y ansible-core &>>$LOG_FILE

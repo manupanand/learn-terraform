@@ -16,7 +16,7 @@ resource "aws_instance" "node_1" {
      user_data = base64encode(templatefile("${path.module}/userdata.sh",{
         AWS_USER     =var.aws_user
         AWS_PASSWORD =var.aws_password
-        role_name    =var.role_name
+        role_name    ="node-1"
      }))
   
     provisioner "remote-exec" {
@@ -30,23 +30,22 @@ resource "aws_instance" "node_1" {
     }
  
 }
-data "external" "file_reader" {
-  depends_on = [ aws_instance.node_1 ]
-  program = ["bash", "-c", "sshpass -p '${var.aws_password}' ssh -o StrictHostKeyChecking=no ec2-user@${aws_instance.node_1.public_ip} 'cat /tmp/execute.sh'"]
-}
-output "generated_text" {
-  value = data.external.file_reader
+
+output "remote_ip" {
+    depends_on = [ aws_instance.node_1 ]
+  value = aws_instance.node_1.public_ip
 }
 resource "aws_instance" "node_2" {
-  depends_on = [ data.external.file_reader ]
+  depends_on = [ aws_instance.node_1 ]
     ami                         = var.aws_ami_id
      instance_type               = "t3.micro"
      vpc_security_group_ids      = [var.security_group_id]
 
-     user_data = base64encode(templatefile("${path.module}/userdata.sh",{
+     user_data = base64encode(templatefile("${path.module}/node-2.sh",{
         AWS_USER     =var.aws_user
         AWS_PASSWORD =var.aws_password
         role_name    ="node-2"
+        remote_ip    = output.remote_ip
      }))
 }
 variable "aws_user" {
