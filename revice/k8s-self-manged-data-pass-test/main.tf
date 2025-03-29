@@ -60,6 +60,3 @@ variable "aws_ami_id" {
 variable "security_group_id" {
   default = "sg-00ac6f603cfd19030"
 }
-variable "role_name" {
-  
-}
