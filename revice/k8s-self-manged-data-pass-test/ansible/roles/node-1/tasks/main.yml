@@ -1,9 +1,9 @@
 - name: Create file in instance 
   ansible.builtin.copy: 
    content: |
-      "#!/bin/bash
+      #!/bin/bash
       pwd 
       echo 'is learn about some jiberishsdfjp isdfpsf -nsodfn lsdfpsmsdjfisfn'
-      dnf install jq"
+      dnf install jq
    dest: "/tmp/execute.sh"
    mode: "666"
