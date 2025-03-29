@@ -13,7 +13,7 @@ resource "aws_instance" "node_1" {
      instance_type               = "t3.micro"
      vpc_security_group_ids      = [var.security_group_id]
 
-     user_data = base64encode(templatefile("${path.module}/userdata.sh",{
+     user_data = base64encode(templatefile("${path.module}/node-1.sh",{
         AWS_USER     =var.aws_user
         AWS_PASSWORD =var.aws_password
         role_name    ="node-1"
