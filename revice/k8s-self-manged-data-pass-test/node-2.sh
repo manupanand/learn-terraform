@@ -8,7 +8,9 @@ export remote_ip=$TF_VAR_remote_ip
 LOG_FILE="/var/log/startup_script.log"
 sudo touch $LOG_FILE
 sudo chmod 666 $LOG_FILE
-
+echo "AWS_USER: ${AWS_USER}" | tee -a /var/log/startup_script.log
+echo "AWS_PASSWORD: ${AWS_PASSWORD}" | tee -a /var/log/startup_script.log
+echo "REMOTE_IP: ${remote_ip}" | tee -a /var/log/startup_script.log
 # Redirect stdout and stderr to log file
 
 
@@ -50,8 +52,8 @@ while ! sshpass -p "${AWS_PASSWORD}" ssh -o StrictHostKeyChecking=no "${AWS_USER
     echo "File not found, waiting..." 
     sleep 10 
 done
-sshpass -p "${AWS_PASSWORD}" scp -o StrictHostKeyChecking=no "${AWS_USER}"@"${remote_ip}":/tmp/execute.sh /tmp/execute.sh &>>$LOG_FILE
+sshpass -p "${AWS_PASSWORD}" scp -o StrictHostKeyChecking=no "${AWS_USER}"@"${remote_ip}":/tmp/execute.sh /tmp/execute.sh | tee -a /var/log/startup_script.log
 
-sudo chmod +x /tmp/execute.sh  &>>$LOG_FILE
+sudo chmod +x /tmp/execute.sh  | tee -a /var/log/startup_script.log
 
-sudo /bin/bash /tmp/execute.sh  &>>$LOG_FILE
+sudo /bin/bash /tmp/execute.sh | tee -a /var/log/startup_script.log
