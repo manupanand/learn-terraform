@@ -1,0 +1,19 @@
+configs: 
+  params: 
+    server.insecure: true
+
+server: 
+ ingress: 
+   enabled: true 
+   ingressClassName: alb
+   annotations: 
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/group.name: roboshop
+      alb.ingress.kubernetes.io/healthcheck-path: /
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-2:058264470882:certificate/4cd9df2c-4516-4d66-ad57-c84f1ba19b50
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+# run kubectl command to get argocd admin password
+#kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" |base64 -d

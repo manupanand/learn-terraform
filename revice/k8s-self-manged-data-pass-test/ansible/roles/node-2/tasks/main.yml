@@ -1,0 +1,2 @@
+- name: Execute command from file
+  ansible.builtin.shell: "/bin/bash /tmp/execute.sh | tee -a /var/log/token.log"

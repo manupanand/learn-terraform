@@ -191,3 +191,33 @@ resource "helm_release" "argocd" {
   ]
 
 }
+
+# IStio Base
+resource "helm_release" "istio-base" {
+  depends_on = [ null_resource.kube-config ]
+
+  name              = "istio-base"
+  repository        = "https://istio-release.storage.googleapis.com/charts"
+  chart             = "base"
+  namespace         = "istio-system"
+  create_namespace  = true
+  wait              = true
+
+  
+
+}
+
+# IStioD
+resource "helm_release" "istiod" {
+  depends_on = [ null_resource.kube-config,helm_release.istio-base ]
+
+  name              = "istiod"
+  repository        = "https://istio-release.storage.googleapis.com/charts"
+  chart             = "istiod"
+  namespace         = "istio-system"
+  create_namespace  = true
+  wait              = true
+
+  
+
+}
