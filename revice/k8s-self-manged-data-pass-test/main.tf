@@ -19,6 +19,13 @@ resource "aws_instance" "node_1" {
         AWS_PASSWORD =var.aws_password
         role_name    ="node-1"
      }))
+     instance_market_options {
+       market_type = "spot"
+       spot_options {
+         instance_interruption_behavior = "stop"
+         spot_instance_type = "persistent"
+       }
+     }
   #check file
     provisioner "remote-exec" {
       inline = [ "while [ ! -e /tmp/execute.sh ]; do sleep 60 ; done" ]
@@ -69,7 +76,14 @@ resource "aws_instance" "node_2" {
         role_name    ="node-2"
         remote_ip    = aws_instance.node_1.public_ip
      }))
-      #check file- self check scp
+      instance_market_options {
+       market_type = "spot"
+       spot_options {
+         instance_interruption_behavior = "stop"
+         spot_instance_type = "persistent"
+       }
+     }
+      #check file- self check scp file exist or not
     provisioner "remote-exec" {
       inline = [ "while [ ! -e /tmp/execute.sh ]; do sleep 60 ; done" ]
     }

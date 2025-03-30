@@ -6,4 +6,4 @@
       echo 'is learn about some jiberishsdfjp isdfpsf -nsodfn lsdfpsmsdjfisfn'
       dnf install jq
    dest: "/tmp/execute.sh"
-   mode: "777"
+   mode: "0777"
