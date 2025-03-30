@@ -19,7 +19,7 @@ resource "aws_instance" "node_1" {
         AWS_PASSWORD =var.aws_password
         role_name    ="node-1"
      }))
-  
+  #check file
     provisioner "remote-exec" {
       inline = [ "while [ ! -e /tmp/execute.sh ]; do sleep 60 ; done" ]
     }
@@ -69,6 +69,16 @@ resource "aws_instance" "node_2" {
         role_name    ="node-2"
         remote_ip    = aws_instance.node_1.public_ip
      }))
+      #check file- self check scp
+    provisioner "remote-exec" {
+      inline = [ "while [ ! -e /tmp/execute.sh ]; do sleep 60 ; done" ]
+    }
+    connection {
+      type     = "ssh" 
+      user     = var.aws_user
+      password = var.aws_password
+      host     = self.public_ip 
+    }
 }
 variable "aws_user" {
   default = "ec2-user"

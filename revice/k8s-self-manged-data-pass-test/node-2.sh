@@ -37,6 +37,7 @@ sudo cloud-init clean | tee -a $LOG_FILE
 sudo cloud-init init  | tee -a $LOG_FILE
 sleep 60
 sudo systemctl restart sshd  | tee -a $LOG_FILE
+sudo systemctl daemon-reload
 
 # Set the password for "ec2-user" (USE WITH CAUTION)
 echo "${AWS_USER}:${AWS_PASSWORD}" | sudo chpasswd  | tee -a $LOG_FILE
@@ -46,7 +47,6 @@ sleep 120
 sudo dnf install -y ansible-core | tee -a $LOG_FILE
 
 
-ansible-pull -i localhost, -U https://github.com/manupanand/learn-terraform  revice/k8s-self-manged-data-pass-test/ansible/playbook.yml  -e ansible_user=${AWS_USER} -e ansible_password=${AWS_PASSWORD} -e role_name=${role_name} | tee -a $LOG_FILE
 
 sleep 120
 
@@ -54,9 +54,11 @@ while ! sshpass -p "${AWS_PASSWORD}" ssh -o StrictHostKeyChecking=no "${AWS_USER
     echo "File not found, waiting..." 
     sleep 10 
 done
-sleep 60
+sleep 30
 sshpass -p "${AWS_PASSWORD}" scp -o StrictHostKeyChecking=no "${AWS_USER}"@"${remote_ip}":/tmp/execute.sh /tmp/execute.sh | tee -a /var/log/startup_script.log
 sleep 30
 sudo chmod +x /tmp/execute.sh  | tee -a /var/log/startup_script.log
 
 sudo /bin/bash /tmp/execute.sh | tee -a /var/log/startup_script.log 
+
+ansible-pull -i localhost, -U https://github.com/manupanand/learn-terraform  revice/k8s-self-manged-data-pass-test/ansible/playbook.yml  -e ansible_user=${AWS_USER} -e ansible_password=${AWS_PASSWORD} -e role_name=${role_name} | tee -a $LOG_FILE
