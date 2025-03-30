@@ -12,6 +12,7 @@ resource "aws_instance" "node_1" {
      ami                         = var.aws_ami_id
      instance_type               = "t3.micro"
      vpc_security_group_ids      = [var.security_group_id]
+     key_name                    =  "workstation-server" 
 
      user_data = base64encode(templatefile("${path.module}/node-1.sh",{
         AWS_USER     =var.aws_user
@@ -60,6 +61,7 @@ resource "aws_instance" "node_2" {
     ami                         = var.aws_ami_id
      instance_type               = "t3.micro"
      vpc_security_group_ids      = [var.security_group_id]
+    key_name                    =  "workstation-server" 
 
      user_data = base64encode(templatefile("${path.module}/node-2.sh",{
         AWS_USER     =var.aws_user
