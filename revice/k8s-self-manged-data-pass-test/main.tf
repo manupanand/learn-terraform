@@ -10,7 +10,7 @@ terraform {
 }
 resource "aws_instance" "node_1" {
      ami                         = var.aws_ami_id
-     instance_type               = "t3.micro"
+     instance_type               = "t3.medium"
      vpc_security_group_ids      = [var.security_group_id]
      key_name                    =  "workstation-server" 
 
@@ -66,7 +66,7 @@ resource "null_resource" "wait" {
 resource "aws_instance" "node_2" {
   depends_on = [ null_resource.wait ]
     ami                         = var.aws_ami_id
-     instance_type               = "t3.micro"
+     instance_type               = "t3.medium"
      vpc_security_group_ids      = [var.security_group_id]
     key_name                    =  "workstation-server" 
 
