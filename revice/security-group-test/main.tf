@@ -33,15 +33,15 @@ resource "aws_security_group" "kube_control_plane" {
     }
   }
 # dynamic egress
-    # dynamic "egress" {
-    # for_each = var.cp_egress
-    # content {
-    #     from_port     = tonumber(split("-",ingress.value.port)[0])
-    #     to_port       = tonumber(split("-",ingress.value.port)[length(split("-",ingress.value.port))-1])
-    #     protocol    = "TCP"
-    #     cidr_blocks = [tostring(data.aws_subnet.kube_subnet.cidr_block)] 
-    # }
-    # }
+    dynamic "egress" {
+    for_each = var.cp_egress
+    content {
+        from_port     = tonumber(split("-",ingress.value.port)[0])
+        to_port       = tonumber(split("-",ingress.value.port)[length(split("-",ingress.value.port))-1])
+        protocol      = "TCP"
+        cidr_blocks   = [tostring(data.aws_subnet.kube_subnet.cidr_block)] 
+            }
+     }
     # egress {
     #   from_port   = 0
     #   to_port     = 0
