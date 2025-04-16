@@ -1,7 +1,5 @@
 variable "project_id" {}
 variable "region" {
-  default = "us-central1"
+  default = "asia-south1"
 }
-variable "credentials_file" {
-  default = "~/.gcp/terraform-sa-key.json" # adjust if stored elsewhere
-}
+variable "credentials_file" {}
