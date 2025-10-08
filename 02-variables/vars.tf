@@ -44,15 +44,16 @@ variable "c"{}# empty how terraform will respond
 #how to enter variable from commad bash
  #along terraform apply -var c=100 -> comes in c="100" later  convert
 
-variable "e"{
-    type=number
+variable "variable_name"{
+   
+    default=10
 }
  output "c"{
-    value=var.c
+    value=var.variable_name
  }
-  output "e"{
-    value=var.e
- }
+ #  output "e"{
+ #    value=var.e
+ # }
  # not a scalable approch send var in commndline
  # use a file for variables
  #teraform->terraform.tfvars
